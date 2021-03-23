@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Searchform from "../components/Searchform";
 import api from "../utils/api";
+import Bookcard from "../components/Bookcards";
 
 class Results extends Component {
   state = {
@@ -17,8 +18,8 @@ class Results extends Component {
       this.setState({
         books: books.data.items
       })
+      console.log(this.state);
     })
-    console.log(this.state);
   }
   handleFormSubmit = event => {
     event.preventDefault();
@@ -27,10 +28,21 @@ class Results extends Component {
   }
   render() {
     return (
-      <Searchform
-        handleInputChange={this.handleInputChange}
-        handleFormSubmit={this.handleFormSubmit}
-        query={this.state.query} />
+      <div>
+        <Searchform
+          handleInputChange={this.handleInputChange}
+          handleFormSubmit={this.handleFormSubmit}
+          query={this.state.query} />
+        <div className="container">{this.state.books.map(book => (
+          <Bookcard 
+          title={book.volumeInfo.title}
+          key={book.id}
+          image={book.volumeInfo.imageLinks.smallThumbnail}
+          description={book.volumeInfo.description}
+          />
+
+        ))}</div>
+      </div>
     )
   }
 }
