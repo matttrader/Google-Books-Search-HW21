@@ -1,15 +1,18 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+// import Button from "react-bootstrap/Button";
 
-function Bookcard(props) {
+function Bookcard({title,image,description,Button}) {
   return (
     <Card style={{ width: '18rem' }}>
-    <Card.Img variant="top" src={props.image} />
+    <Card.Img variant="top" src={image} />
     <Card.Body>
-      <Card.Title>{props.title}</Card.Title>
-      <Card.Text>{props.description}
+      <Card.Title>{title}</Card.Title>
+      <Card.Text>{description}
       </Card.Text>
-    </Card.Body>
+      <Button></Button>
+      </Card.Body>
+
   </Card>
   );
 }

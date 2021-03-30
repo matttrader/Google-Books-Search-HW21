@@ -26,6 +26,19 @@ class Results extends Component {
     console.log("click button");
     this.SearchBooks();
   }
+  handleSave = id => {
+    console.log(id);
+    const book = this.state.books.find(book=>book.id===id);
+    const bookData = {
+      googleID: book.id,
+      title: book.volumeInfo.title, 
+      link: book.volumeInfo.infoLink,
+      description: book.volumeInfo.description,
+      image: book.volumeInfo.imageLinks.thumbnail,
+    }
+    console.log(bookData);
+    api.saveBook(bookData)
+  }
   render() {
     return (
       <div>
@@ -39,6 +52,9 @@ class Results extends Component {
           key={book.id}
           image={book.volumeInfo.imageLinks.smallThumbnail}
           description={book.volumeInfo.description}
+          Button={()=>(
+            <button onClick={()=>this.handleSave(book.id)}>Save</button>
+          )}
           />
 
         ))}</div>
